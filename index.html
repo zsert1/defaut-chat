@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>web socket</title>
+  </head>
+  <script>
+    const webScoket = new WebSocket("ws://localhost:3001");
+
+    webScoket.onopen = function () {
+      console.log("연결 성공");
+    };
+
+    webScoket.onmessage = function (event) {
+      alert(event.data);
+    };
+    webScoket.onclose = function () {
+      alert("연결종료");
+    };
+    webScoket.onerror = function (error) {
+      console.log(error);
+    };
+    const sendMessage = () => {
+      const message = document.getElementById("message").value;
+      webScoket.send(message);
+    };
+  </script>
+  <body>
+    <div>
+      <input type="text" id="message" />
+      <button type="button" onClick="sendMessage()">전송</button>
+    </div>
+  </body>
+</html>
